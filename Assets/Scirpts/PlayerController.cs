@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerController : MonoBehaviour
 {
     public GameObject onOffFlashlight;
+    public GameObject NoteInventoryUi;
+    bool isLockMouse = true;
     private bool checkFlashlightOn = false;
     public float mouseSensitivity = 900f;
     public float movementSpeed = 10f;
@@ -22,7 +25,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         Invoke("DisableMovementPlayer",5.0f);
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -35,6 +38,8 @@ public class PlayerController : MonoBehaviour
             CharacterMovement();
             CharacterCrouch();
             CharacterFlashlight();  
+            OpenNoteUi();
+            CheckLockMouse();
             //FootstepSound();
             
         }
@@ -106,6 +111,38 @@ public class PlayerController : MonoBehaviour
         else
         {
             disableMovementPlayer = false;
+        }
+    }
+
+    void OpenNoteUi()
+    {
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            if(NoteInventoryUi != null)
+            {
+                bool isActive = NoteInventoryUi.activeSelf;
+                NoteInventoryUi.SetActive(!isActive);
+                isLockMouse = isActive;
+                
+                
+            }
+        }
+    }
+
+    void CheckLockMouse()
+    {
+        
+        if(isLockMouse == true)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            //PauseGame
+            Time.timeScale = 1f;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            //PauseGame
+            Time.timeScale = 0f;
         }
     }
 
