@@ -42,11 +42,17 @@ public class PhoneItem : MonoBehaviour
                 nextTextComing.SetActive(true);
                 gameObject.SetActive(false);
                 phone.SetActive(false);
+                Invoke("KeepPhone",10f);
+
 
             }
            
         }
         
+    }
+    void KeepPhone()
+    {
+        phoneInPlayer.GetComponent<Animation>().Play("KeepPhone");
     }
    void OnMouseExit()
     {

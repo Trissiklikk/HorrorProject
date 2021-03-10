@@ -11,11 +11,13 @@ public class TextSystem : MonoBehaviour
     private GameObject newTextPrefab;
     public GameObject textLayer;
     public static string textNext;
+    
 
     //public GameObject[] text;
     void Update()
     {
-         if (textNext != null)
+
+        if (textNext != null)
         {
             newTextPrefab = GameObject.Instantiate(textPrefab);
             newTextPrefab.GetComponent<Text>().text = textNext;
